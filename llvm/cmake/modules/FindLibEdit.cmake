@@ -54,12 +54,16 @@ find_package_handle_standard_args(LibEdit
                                   REQUIRED_VARS
                                     LibEdit_INCLUDE_DIRS
                                     LibEdit_LIBRARIES
+                                    PC_LIBEDIT_LIBRARIES
+                                    PC_LIBEDIT_LIBDIR
+                                    PC_LIBEDIT_INCLUDE_DIRS
                                   VERSION_VAR
                                     LibEdit_VERSION_STRING)
 mark_as_advanced(LibEdit_INCLUDE_DIRS LibEdit_LIBRARIES)
 
 if (LibEdit_FOUND AND NOT TARGET LibEdit::LibEdit)
   add_library(LibEdit::LibEdit INTERFACE IMPORTED)
-  target_link_libraries(LibEdit::LibEdit INTERFACE ${LibEdit_LIBRARIES})
-  target_include_directories(LibEdit::LibEdit INTERFACE ${LibEdit_INCLUDE_DIRS})
+  target_link_libraries(LibEdit::LibEdit INTERFACE ${PC_LIBEDIT_LIBRARIES})
+  target_link_directories(LibEdit::LibEdit INTERFACE ${PC_LIBEDIT_LIBDIR})
+  target_include_directories(LibEdit::LibEdit INTERFACE ${PC_LIBEDIT_INCLUDE_DIRS})
 endif()
